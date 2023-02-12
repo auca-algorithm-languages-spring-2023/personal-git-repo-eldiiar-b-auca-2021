@@ -6,15 +6,13 @@ int main()
 {
     string line;
     list<char> l;
-    auto it = l.begin();
-    auto it2 = l.begin();
     int N;
     cin >> N;
     cin.ignore();
     while(N--)
     {
+        auto it = l.begin();
         getline(cin,line);
-        bool first = false;
         for(char ch : line)
         {
             if (ch == ']'){
@@ -22,27 +20,25 @@ int main()
             }else if (ch == '[')
             {
                 it = l.begin();
-                first = true;
             }else if (ch == '<')
             {
-                if (first && !l.empty())
+                if (it != l.begin())
                 {
-                    l.erase(it2);
-                }else if (!l.empty())
-                {
-                    l.pop_back();
+                    it--;
+                    it=l.erase(it);
                 }
             }else {
-                it2 = l.insert(it, ch);
+                it = l.insert(it, ch);
+                it++;
             }
         }
-        while(!l.empty()){
+        while(!l.empty())
+        {
             cout << l.front();
             l.pop_front();
         }
-
-
-
+        line = "";
+        cout << endl;
     }
 
 }
