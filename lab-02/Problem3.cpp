@@ -1,8 +1,6 @@
 #include <iostream>
-#include <vector>
 #include <queue>
 #include <string>
-
 using namespace std;
 void count(queue<int> &q,  int &length, int &sum);
 int main()
