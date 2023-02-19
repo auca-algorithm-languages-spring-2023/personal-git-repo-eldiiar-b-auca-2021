@@ -7,30 +7,30 @@ int main()
     cin >> N;
     while(N--)
     {
-        int index = 0, add = 0, get = 0;
-        cin >> add;
-        cin >> get;
-        vector<int> elements(add);
-        for (int i = 0; i < add; i++)
+        multiset<int> set;
+        int size, cmd;
+        cin >> size;
+        vector<int> storage(size);
+        cin >> cmd;
+        for (int i = 0; i < size; i++)
         {
-            int temp;
-            cin >> temp;
-            elements[i] = temp;
+            cin >> storage[i];
         }
-        map<int, vector<int>> map;
-        for (int i = 0; i < add; i++)
+        int index = 0, j = 0;
+
+        for (int i = 0; i < cmd; i++)
         {
-            for (int j = 0; j <= i; j++)
-            {
-                map[i].push_back(elements[j]);
-            }
-            sort(map[i].begin(), map[i].end());
-        }
-        for (int i = 0; i < get; i++)
-        {
-            int temp;
-            cin >> temp;
-            cout << map[--temp][index++] << endl;
+           int t;
+           cin >> t;
+           while(j < t)
+           {
+               set.insert(storage[j++]);
+           }
+           auto it = set.begin();
+
+           advance(it, index);
+           index++;
+           cout << *it << endl;
         }
         cout << endl;
     }
