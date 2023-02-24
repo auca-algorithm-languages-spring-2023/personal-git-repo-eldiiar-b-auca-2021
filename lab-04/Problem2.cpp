@@ -26,19 +26,7 @@ int main()
             set.erase(itB);
             set.erase(itE);
         }
-        while(!set.empty())
-        {
-            itB = set.begin();
-            itE = set.end();
-            itE--;
-            sum += *itE-*itB;
-            if (itB == itE)
-            {
-                break;
-            }
-            set.erase(itB);
-            set.erase(itE);
-        }
+
         cout << sum << "\n";
     }
 }
