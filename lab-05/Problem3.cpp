@@ -11,7 +11,6 @@ void output(map<string, set<string>> &v){
             transmission[*it.second.begin()].insert(it.first);
         }
     }
-
     for (auto it : transmission)
     {
         auto it2 = control.find(it.first);
