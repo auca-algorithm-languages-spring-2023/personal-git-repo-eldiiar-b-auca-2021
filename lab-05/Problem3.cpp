@@ -8,7 +8,6 @@ void output(map<string, set<string>> &v){
     for (auto it :v)
     {
         if (!it.second.empty() && it.second.size() < 2) {
-            //cout << *it.second.begin() << " " << it.first << endl;
             transmission[*it.second.begin()].insert(it.first);
         }
     }
@@ -29,7 +28,8 @@ void output(map<string, set<string>> &v){
     sort(result.begin(),result.end(),[](pair<string, int> &f, pair<string, int> &s) {
         if (f.second > s.second){
             return true;
-        }
+        }else if (f.second == s.second && f.first < s.first)
+             return true;
         return false;
     });
     for (auto it : result)
