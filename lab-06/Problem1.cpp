@@ -37,7 +37,6 @@ int main()
                 }
             }
         }
-
         int m = 0;
         string result, text = "";
         for (auto it : ve)
@@ -58,9 +57,7 @@ int main()
         if (concat)
         {
             for (auto it : st)
-            {
                 text += it;
-            }
             cout << text + text << endl;
         }
         if (test != 0)
