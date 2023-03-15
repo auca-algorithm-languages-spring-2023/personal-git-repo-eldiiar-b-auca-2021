@@ -1,37 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
-set<string> global_s1;
 vector<string> global_s;
 void giveResult(set<string> &words, map<string, int> &mpp, map<string, set<string>> &m)
 {
-    map<string, vector<int>> v;
     bool printed = true;
-    for (auto it : m)
+    set<string> collector;
+    for (auto it : words)
     {
-        vector<string> quantity;
-
-        set_intersection(words.begin(), words.end(), it.second.begin(), it.second.end(), back_inserter(quantity));
-
-        if (mpp[it.first] <= quantity.size())
+        for (auto it2 : m)
         {
+            if (it2.second.find(it) != it2.second.end())
+            {
+                mpp[it2.first]--;
+            }
+        }
+    }
+    for (auto it : mpp)
+    {
+        if (it.second <= 0)
+        {
+            collector.insert(it.first);
             printed = false;
-            // cout << it.first << " ";
-            global_s1.insert(it.first);
         }
     }
     bool first = true;
     for (auto it : global_s)
     {
-        auto it2 = global_s1.find(it);
-        if (it2 != end(global_s1))
+        auto it2 = collector.find(it);
+        if (it2 != end(collector) && !global_s.empty())
         {
             if (first)
             {
-                cout << *it2;
+                cout << it;
             }
             else
             {
-                cout << "," << *it2;
+                cout << "," << it;
             }
             first = false;
         }
@@ -52,7 +56,6 @@ int main()
     while (N--)
     {
         set<string> words;
-        // words.insert("these");
         int categories;
         cin >> categories;
         map<string, int> mpp;
@@ -74,31 +77,20 @@ int main()
                 m[nCat].insert(s);
             }
         }
-        cin.ignore(101, '\n');
+        cin.ignore(100, '\n');
         string temp;
         while (getline(cin, temp) && !temp.empty())
         {
-           string text;
-            for (auto it : temp)
+            string text;
+            transform(temp.begin(), temp.end(), temp.begin(), [](char c)
+            { return isalpha(c) ? c : ' '; });
+            istringstream ss(temp);
+            while (ss >> text)
             {
-                if ((it <= 'z' && it >= 'a') || (it <= 'Z' && it >= 'A'))
-                {
-                    text += it;
-                }
-                else
-                {
-                    words.insert(text);
-                    st.insert(text);
-                    text = "";
-                }
+                words.insert(text);
             }
         }
         giveResult(words, mpp, m);
         global_s.clear();
-        global_s1.clear();
     }
-
-    for (auto it : st)
-        cout << it << " ";
-    //cout << endl;
 }
