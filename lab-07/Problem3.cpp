@@ -10,20 +10,27 @@ int main()
     int N;
     cin >> N;
     cin.ignore();
-    map<string, double> m;
-    int total = 0;
+    bool first = true;
+
     while (N--)
     {
-        cin.ignore();
-        for (string tree; getline(cin, tree);)
+        int total = 0;
+        map<string, double> m;
+        if (first)
+            cin.ignore();
+        first = false;
+        for (string tree; getline(cin, tree) && !tree.empty();)
         {
             m[tree]++;
             total++;
         }
+        cout << fixed << setprecision(4);
         for (auto it : m)
         {
             it.second = it.second * 100 / total;
             cout << it.first << " " << it.second << endl;
         }
+        if (N != 0)
+            cout << endl;
     }
 }
